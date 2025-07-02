@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>OAuth Callback</title>
+  </head>
+  <body>
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const code = urlParams.get("code");
+      const state = urlParams.get("state");
+
+      if (code) {
+        window.opener.postMessage(
+          { type: "oauth-code", code, state },
+          window.location.origin
+        );
+      }
+
+      setTimeout(() => window.close(), 100);
+    </script>
+  </body>
+</html>
